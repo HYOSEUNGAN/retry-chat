@@ -1,17 +1,18 @@
-import { Meteor } from 'meteor/meteor'
-import './main.html'
-import '/imports/collections'
-import '/imports/client'
-import '/imports/routes'
-import 'bootstrap'
+import { Meteor } from "meteor/meteor";
+import "./main.html";
+import "/imports/collections";
+import "/imports/client";
+import "/imports/routes";
+import "/imports/server/methods";
+import "bootstrap";
 
-Meteor.startup(function() {
+Meteor.startup(function () {
   // Meteor.setTimeout(callAI, 5000)
-})
+});
 
 function callAI() {
-  const next = Math.floor(Math.random() * 3000) + 7000
+  const next = Math.floor(Math.random() * 3000) + 7000;
 
-  Meteor.userId() && Meteor.call('_ai')
-  Meteor.setTimeout(callAI, next)
+  Meteor.userId() && Meteor.call("_ai");
+  Meteor.setTimeout(callAI, next);
 }
