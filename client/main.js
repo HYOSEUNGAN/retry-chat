@@ -3,7 +3,7 @@ import "./main.html";
 import "/imports/collections";
 import "/imports/client";
 import "/imports/routes";
-import "/imports/server/methods";
+// import "/imports/server/methods";
 import "bootstrap";
 
 Meteor.startup(function () {
@@ -11,7 +11,7 @@ Meteor.startup(function () {
 });
 
 function callAI() {
-  const next = Math.floor(Math.random() * 3000) + 7000;
+  const next = Math.floor(Madth.random() * 3000) + 7000;
 
   Meteor.userId() && Meteor.call("_ai");
   Meteor.setTimeout(callAI, next);

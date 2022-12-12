@@ -23,7 +23,8 @@ Template.roomListPage.events({
     Meteor.logout();
   },
   "click .room"() {
-    Meteor.call("roomInsert");
-    // FlowRouter.go("/chatRoom/:roomId")
+    Meteor.call("roomInsert", (err, room_id) => {
+      err ? alert(err) : FlowRouter.go("/chatRoom/" + room_id);
+    });
   },
 });
