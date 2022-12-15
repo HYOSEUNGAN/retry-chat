@@ -1,74 +1,49 @@
 <template name="chatRoomPage">
-  <section class="gradient-custom w-100 h-100" id="forFoot">
-    <button type="button" class="btn btn-secondary btn-lg Back m-3 ">Back</button>
-    <button type="button" class="btn btn-danger btn-lg Remove m-3 float-end ">Remove</button>
+  <section class="gradient-custom w-100 h-100 scroll-box" id="forFoot">
+    <div class="sticky-lg-top ">
+      <button type="button" class="btn btn-secondary btn-lg Back m-3 ">Back</button>
+      <button type="button" class="btn btn-danger btn-lg Remove m-3 float-end ">Remove</button>
+      <h1 class="text-white text-center mb-5">Chat Room</h1>
+    </div>
+    <div class="position-sticky w-100 h-100" id="z-index" >
+      <ul class="list-unstyled text-white m-2" id="top_bottom">
+<!--      ✅유저 (start)-->
+<!--      <div class="width:100% heighit:70%">-->
+      {{#each item in Messages}}
+            <li class="d-flex justify-content-start {{Messages_location item}} mb-4 ">
+              <div class="card mask-custom">
+                <div class="card-header d- flex justify-content-between p-3 border-bottom:1px solid)">
+                  <p class="fw-bold mb-0">{{item.nickName}}</p>
+                  <p class="text-light small mb-0"><i class="far fa-clock"></i>{{Date item.createdAt}}</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-3">
+                    {{item.message}}
+                  </p>
+                </div>
+              </div>
+              <img src="{{item.avatarImg}}" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong" width="80"/>
+            </li>
+      {{/each}}
+<!--      </div>-->
 
-<!--    ✅유저-->
-<!--    {{#each Messages}}-->
-<!--      {{_id}}-->
-<!--    {{/each}}-->
-        {{Messages}}
-<!--    {{#each Messages}}-->
-    <h1 class="text-white m-3">Chat Room</h1>
-
-<!--    {{nickName}}-->
-<!--    {{#each Messages}}-->
-    <ul class="list-unstyled text-white m-2">
-          {{#each Messages}}
-      <li class="d-flex justify-content-start mb-4">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong" width="80"/>
-        <div class="card mask-custom">
-          <div class="card-header d- flex justify-content-between p-3 border-bottom:1px solid)">
-            <p class="fw-bold mb-0">{{nickName}}</p>
-            <p class="text-light small mb-0"><i class="far fa-clock"></i>2022-12-12 7hour</p>
-          </div>
-          <div class="card-body">
-            <p class="mb-0">
-<!--                {{message}}-->
-            </p>
-          </div>
-        </div>
-      </li>
-            {{/each}}
-
-<!--      {{/ each}}-->
-
-<!--      ✅상대방 (start)-->
-      <li class="d-flex justify-content-end mb-4">
-        <div class="card mask-custom">
-          <div class="card-header d- flex justify-content-between p-3 border-bottom:1px solid)">
-            <p class="fw-bold mb-0">Hyoseung An</p>
-            <p class="text-light small mb-0"><i class="far fa-clock"></i>2022-12-12 7hour</p>
-          </div>
-          <div class="card-body">
-            <p class="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong" width="80"/>
-      </li>
-
-
-
-
-
-
-<!--      <div class="footer fixed-bottom mb-3">-->
-      <div class="container ">
+<!--      ✅버튼-->
+      <div class="footer fixed-bottom mb-3">
+      <div class="container mt-auto">
         <hr />
         <form class="textForm">
       <li class="mb-3 flex-shrink-0">
         <div class="form-outline form-white rounded">
           <label class="form-label fw-bold fs-4" for="textAreaExample3">Message</label>
-          <textarea class="form-control" id="textAreaExample3" name="inputText" rows="4"></textarea>
+          <textarea class="form-control check" id="textAreaExample3" name="inputText" rows="4"></textarea>
         </div>
       </li>
       <button type="submit" class="btn btn-light btn-lg btn-rounded float-end mt-0 fw-bold btn-text">Send</button>
         </form>
       </div>
-<!--      </div>-->
+      </div>
     </ul>
+    </div>
+
   </section>
 </template>

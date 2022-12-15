@@ -2,16 +2,17 @@ import { Meteor } from "meteor/meteor";
 import { Rooms, Read } from "/imports/collections";
 
 Meteor.methods({
-  roomInsert() {
+  roomInsert(data) {
     const time = new Date(); //비교??
 
     Rooms.insert({
       updatedAt: time,
-      lastUserId: "",
-      lastUserName: "new chat room",
-      lastUserAvatar: "",
+      lastUserId: data.lastUserId,
+      lastUserName: data.lastUserName,
+      lastUserAvatar: data.lastUserAvatar,
       lastMessage: "새로운 채팅방이 생성되었습니다",
       joiner: [this.userId], //방 참여자 아이디 추가될 것이므로 ID이다
+      roomId:data.roomId,
     });
     const room_id = Rooms.findOne({ updatedAt: time })._id; //room_id
 

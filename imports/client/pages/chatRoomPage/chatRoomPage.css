@@ -18,3 +18,18 @@
 /*#forFoot{*/
 /*  flex:1 0 auto;*/
 /*}*/
+#top_bottom{
+  /*padding-top:170px;*/
+  padding-bottom:230px;
+  position: relative;
+  /*z-index: 2000;*/
+}
+#z-index{
+  /*z-index:1;*/
+}
+.position-fixed{
+  /*z-index: 3000;*/
+}
+.check{
+  white-space: pre;
+}

@@ -3,7 +3,6 @@ import { Messages, Rooms } from "../../collections";
 
 Meteor.methods({
   messageInsert(data) {
-    console.log(data);
     Rooms.update(
       { _id: data.roomId },
       {
