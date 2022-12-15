@@ -1,4 +1,4 @@
-import { Read } from "../../collections";
+import { Read } from "/imports/collections";
 import { Meteor } from "meteor/meteor";
 
 Meteor.publish("read", function (user_id) {

@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
-import { Messages } from "../../collections";
+import { Messages } from "/imports/collections";
 
 Meteor.publish("chatMessage", function (roomId) {
-  return Messages.find({  $or : [ { roomId : roomId }, { roomId : "first" } ] });
+  return Messages.find({ roomId : roomId });
 });

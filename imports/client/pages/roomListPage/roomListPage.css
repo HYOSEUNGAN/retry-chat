@@ -1,12 +1,9 @@
 .gradient-custom {
   overflow-y: auto;
   background: #fccb90;
-
   background: -webkit-linear-gradient(to bottom right, rgba(252, 203, 144, 1), rgba(213, 126, 235, 1));
-
   background: linear-gradient(to bottom right, rgba(252, 203, 144, 1), rgba(213, 126, 235, 1))
 }
-
 .mask-custom {
   background: rgba(24, 24, 16, .2);
   border-radius: 2em;

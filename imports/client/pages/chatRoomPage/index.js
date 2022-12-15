@@ -1,60 +1,60 @@
-import "./chatRoomPage.html";
-import "./chatRoomPage.css";
-import { Template } from "meteor/templating";
-import { FlowRouter } from "meteor/ostrio:flow-router-extra";
-import { Messages, Rooms } from "../../../collections";
-import { Tracker } from 'meteor/tracker'
-
-//입력창 줄바꿈 입력 가능 🚨
-
-// 메세지 리스트 출력 (줄바꿈 적용 필요)
-// 본인 오른쪽 (이름/아바타 미노출, 시간 분단위 노출)
-// 상대방 왼쪽 (이름/아바타/시간 분단위 노출)
-
-// 시스템 타입 왼쪽 (말풍선/이름/아바타 미노출)
-
-// 방을 생성하면, "000님이 방을 생성"
-// 방에 입장하면, "000님 입장"
-// 방에서 나가면, "000님 퇴장"
-// 뒤로가기/퇴장하기 기능
-// 스크롤 하단고정
-
-// window.scrollTo(0, document.body.scrollHeight);
+import './chatRoomPage.html';
+import './chatRoomPage.css';
+import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import { Messages, Rooms } from "/imports/collections";
+import { Tracker } from 'meteor/tracker';
 
 Template.chatRoomPage.onCreated(function () {
   const roomId = FlowRouter.getParam("roomId");
   this.subscribe("chatMessage", roomId);
 });
 
-
-
-Template.chatRoomPage.onRendered(  function () {
-  const user = Meteor.user().profile.nickName;
-    const InMessage = user + "님이 입장하셨습니다";
-    chatText_Data(InMessage, true);
-    const self= this
+Template.chatRoomPage.onRendered( function () {
+  // this.autorun(function(){
+  //   const isFalse =  Messages.findOne({notice:false})
+  //   console.log(isFalse)
+  //   if(isFalse){
+  //     console.log(false)
+  //   }else{
+  //     const user = Meteor.user().profile.nickName;
+  //     const InMessage = user + "님이 입장하셨습니다";
+  //     chatText_Data(InMessage, true);
+  //   }
+  // })
+      const user = Meteor.user().profile.nickName;
+      const InMessage = user + "님이 입장하셨습니다";
+      chatText_Data(InMessage, true);
+  const self= this
 
     //렌더링 되기전
-    this.autorun(function(){
-      console.log(Messages.find({}).count())
+    // this.autorun(function(){
+    //   console.log(Messages.find({}).count())
+    //
+    //   Tracker.flush()
+    //   const element = self.find(".scroll-box")
+    //   console.log(element)
+    //
+    //   const msg_height = element.scrollHeight
+    //   element.scroll(0, msg_height)
+    //   // Tracker.afterFlush(function(){
+    //   // })
+    // })
 
-      Tracker.flush()
+    setTimeout(()=>{
       const element = self.find(".scroll-box")
-      console.log(element)
-
       const msg_height = element.scrollHeight
-      element.scroll(0, msg_height)
-      // Tracker.afterFlush(function(){
-      // })
-    })
-
-
+      element.scroll(0, msg_height)},100)
 });
 
 Template.chatRoomPage.onDestroyed(function () {});
 
 Template.chatRoomPage.helpers({
   Messages() {
+    // const test =  Messages.findOne({notice:false})
+    // Session.set("test", test)
+    // console.log(Session.get("test"))
+
     return Messages.find({});
   },
   Messages_location(item) {
@@ -66,9 +66,12 @@ Template.chatRoomPage.helpers({
     }
   },
   Date(item) {
-    return item.toLocaleString();
+    const getMonth = item.getMonth()+1
+    return getMonth+"월"+item.getDate()+"일"+item.getHours()+"시" + item.getMinutes()+"분"
   },
 });
+
+
 
 Template.chatRoomPage.events({
   "click .Remove"() {
@@ -90,15 +93,18 @@ Template.chatRoomPage.events({
     instance.find("#textAreaExample3").value = "";
   },
   "keyup .textForm"(event, instance) {
+    const text = instance.find("#textAreaExample3").value;
     if (event.keyCode === 13) {
-      // if (!event.shiftKey) {
+      if (event.shiftKey) {
+        event.preventDefault();
+        instance.find("#textAreaExample3").replaceAll("\r\n", "<br>"); //🚨DB에서 인식 잘못하는 현상 체크?
+        Text = "";
+      } else {
         event.preventDefault();
         const Text = instance.find("#textAreaExample3").value;
         chatText_Data(Text, true);
         instance.find("#textAreaExample3").value = "";
-      // } else {
-      //   // instance.find("#textAreaExample3").replaceAll("\r\n", "<br>"); //🚨DB에서 인식 잘못하는 현상 체크
-      // }
+      }
     }
   },
 });

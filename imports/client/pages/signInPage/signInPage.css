@@ -1,11 +1,6 @@
 .gradient-custom-2 {
-
   background: #fccb90;
-
-
   background: -webkit-linear-gradient(to right, #B28920FF, #8a26a0, #dd3675, #5F1EA4FF);
-
-
   background: linear-gradient(to right, #B28920FF, #d8363a, #dd3675, #5F1EA4FF);
 }
 

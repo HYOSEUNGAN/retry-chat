@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { Messages, Rooms } from "../../collections";
+import { Messages, Rooms } from "/imports/collections";
 
 Meteor.methods({
   roomExit(roomId) {

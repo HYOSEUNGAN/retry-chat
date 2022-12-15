@@ -1,4 +1,4 @@
-import { Rooms } from "../../collections";
+import { Rooms } from "/imports/collections"
 
 Meteor.methods({
   joinerUpdate(roomId, userId) {

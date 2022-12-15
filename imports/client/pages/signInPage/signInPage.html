@@ -1,6 +1,5 @@
 <template name="signInPage">
   <section class="h-100 gradient-form" style="background-color: #eee;">
-
     <div class="row">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -15,25 +14,21 @@
                          style="width: 185px;" alt="logo">
                     <h4 class="mt-3 mb-5 pb-1">Please Login</h4>
                   </div>
-
                   <form id="submit-signIn" class="was-validated" >
                     <p>Please login to your account</p>
-
                     <div class="form-outline mb-4">
                       <input name="username" type="text" id="form2Example11" class="form-control"
-                             placeholder="Username" required/>
+                             placeholder="Username"  value="{{rememberId}}" required/>
                       <div class="valid-feedback">Valid</div>
                       <div class="invalid-feedback">Please fill out this field.</div>
                       <label class="form-label" for="form2Example11">Username</label>
                     </div>
-
                     <div class="form-outline mb-4">
                       <input name="password" type="password" id="form2Example22" class="form-control" required/>
                       <div class="valid-feedback">Valid</div>
                       <div class="invalid-feedback">Please fill out this field.</div>
                       <label class="form-label" for="form2Example22">Password</label>
                     </div>
-
                     <div class="text-center pt-1 mb-5 pb-1">
                       <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                         in</button>
@@ -42,14 +37,11 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                       Remember me
                     </label>
-
                     <div class="d-flex align-items-center justify-content-center pb-4">
 <!--                      <p class="mb-0 me-2">Don't have an account?</p>-->
 <!--                      <button type="cl" class="btn btn-outline-danger">Create new</button>-->
                     </div>
-
                   </form>
-
                 </div>
               </div>
               <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
@@ -59,7 +51,6 @@
                     Creverse always seeks novelty. An innovative and sustainable metaverse. We agitate nft market and crypto market</p>
                      <a href="https://github.com/HYOSEUNGAN/retry-chat"><i class="bi bi-github fs-2 mt-2"></i></a>
                 </div>
-
               </div>
             </div>
           </div>

@@ -8,7 +8,6 @@
     <div class="position-sticky w-100 h-100" id="z-index" >
       <ul class="list-unstyled text-white m-2" id="top_bottom">
 <!--      ✅유저 (start)-->
-<!--      <div class="width:100% heighit:70%">-->
       {{#each item in Messages}}
             <li class="d-flex justify-content-start {{Messages_location item}} mb-4 ">
               <div class="card mask-custom">
@@ -17,7 +16,7 @@
                   <p class="text-light small mb-0"><i class="far fa-clock"></i>{{Date item.createdAt}}</p>
                 </div>
                 <div class="card-body">
-                  <p class="mb-3">
+                  <p class="mb-3" style="white-space: pre-line;">
                     {{item.message}}
                   </p>
                 </div>
@@ -25,8 +24,6 @@
               <img src="{{item.avatarImg}}" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong" width="80"/>
             </li>
       {{/each}}
-<!--      </div>-->
-
 <!--      ✅버튼-->
       <div class="footer fixed-bottom mb-3">
       <div class="container mt-auto">
@@ -44,6 +41,5 @@
       </div>
     </ul>
     </div>
-
   </section>
 </template>

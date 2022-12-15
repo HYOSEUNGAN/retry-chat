@@ -3,6 +3,7 @@ import './signOutPage.css'
 import { Template } from 'meteor/templating'
 
 Template.signOutPage.onCreated(function() {
+  // Meteor.logout()
 })
 
 Template.signOutPage.onRendered(function() {
