@@ -1,4 +1,4 @@
-import { Rooms } from "/imports/collections"
+import { Rooms } from '/imports/collections'
 
 Meteor.methods({
   joinerUpdate(roomId, userId) {
@@ -6,7 +6,7 @@ Meteor.methods({
       { _id: roomId },
       {
         $addToSet: { joiner: userId },
-      }
-    );
+      },
+    )
   },
-});
+})

@@ -1,6 +1,6 @@
-import { Meteor } from "meteor/meteor";
-import { Rooms } from "/imports/collections";
+import { Meteor } from 'meteor/meteor'
+import { Rooms } from '/imports/collections'
 
-Meteor.publish("roomList", function (check) {
-  return Rooms.find({});
-});
+Meteor.publish('roomList', function(check) {
+  return Rooms.find({})
+})

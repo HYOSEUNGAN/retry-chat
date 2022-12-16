@@ -5,41 +5,43 @@
       <button type="button" class="btn btn-danger btn-lg Remove m-3 float-end ">Remove</button>
       <h1 class="text-white text-center mb-5">Chat Room</h1>
     </div>
-    <div class="position-sticky w-100 h-100" id="z-index" >
+    <div class="position-sticky w-100 h-100" id="z-index">
       <ul class="list-unstyled text-white m-2" id="top_bottom">
-<!--      ✅유저 (start)-->
-      {{#each item in Messages}}
-            <li class="d-flex justify-content-start {{Messages_location item}} mb-4 ">
-              <div class="card mask-custom">
-                <div class="card-header d- flex justify-content-between p-3 border-bottom:1px solid)">
-                  <p class="fw-bold mb-0">{{item.nickName}}</p>
-                  <p class="text-light small mb-0"><i class="far fa-clock"></i>{{Date item.createdAt}}</p>
+        <!--      ✅유저 (start)-->
+        {{#each item in Messages}}
+        <li class="d-flex justify-content-start {{Messages_location item}} mb-4 ">
+          <div class="card mask-custom">
+            <div class="card-header d- flex justify-content-between p-3 border-bottom:1px solid)">
+              <p class="fw-bold mb-0">{{item.nickName}}</p>
+              <p class="text-light small mb-0"><i class="far fa-clock"></i>{{Date item.createdAt}}</p>
+            </div>
+            <div class="card-body">
+              <p class="mb-3" style="white-space: pre-line;">
+                {{item.message}}
+              </p>
+            </div>
+          </div>
+          <img src="{{item.avatarImg}}" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong"
+               width="80"/>
+        </li>
+        {{/each}}
+        <!--      ✅버튼-->
+        <div class="footer fixed-bottom mb-3">
+          <div class="container mt-auto">
+            <hr/>
+            <form class="textForm">
+              <li class="mb-3 flex-shrink-0">
+                <div class="form-outline form-white rounded">
+                  <label class="form-label fw-bold fs-4" for="textAreaExample3">Message</label>
+                  <textarea class="form-control check" id="textAreaExample3" name="inputText" rows="4"></textarea>
                 </div>
-                <div class="card-body">
-                  <p class="mb-3" style="white-space: pre-line;">
-                    {{item.message}}
-                  </p>
-                </div>
-              </div>
-              <img src="{{item.avatarImg}}" alt="avatar" class="rounded-circle d-flex align-self-start m-3 shadow-1-strong" width="80"/>
-            </li>
-      {{/each}}
-<!--      ✅버튼-->
-      <div class="footer fixed-bottom mb-3">
-      <div class="container mt-auto">
-        <hr />
-        <form class="textForm">
-      <li class="mb-3 flex-shrink-0">
-        <div class="form-outline form-white rounded">
-          <label class="form-label fw-bold fs-4" for="textAreaExample3">Message</label>
-          <textarea class="form-control check" id="textAreaExample3" name="inputText" rows="4"></textarea>
+              </li>
+              <button type="submit" class="btn btn-light btn-lg btn-rounded float-end mt-0 fw-bold btn-text">Send
+              </button>
+            </form>
+          </div>
         </div>
-      </li>
-      <button type="submit" class="btn btn-light btn-lg btn-rounded float-end mt-0 fw-bold btn-text">Send</button>
-        </form>
-      </div>
-      </div>
-    </ul>
+      </ul>
     </div>
   </section>
 </template>
