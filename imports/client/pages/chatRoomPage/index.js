@@ -70,14 +70,14 @@ Template.chatRoomPage.events({
       const text = instance.find('#textAreaExample3').value
       text.replaceAll('\r\n', '<br>')
     }
-    else {
-      if (event.keyCode === 13) {
+    else if(event.keyCode === 13){
         event.preventDefault()
         const Text = instance.find('#textAreaExample3').value
         chatText_Data(Text, true)
         instance.find('#textAreaExample3').value = ''
-      }
+    }else{
     }
+
 
   },
 })
