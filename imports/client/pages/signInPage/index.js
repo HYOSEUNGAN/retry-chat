@@ -4,7 +4,6 @@ import { Template } from "meteor/templating";
 import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 
 Template.signInPage.onCreated(function () {});
-
 Template.signInPage.onRendered(function () {
   if (localStorage.getItem("userId")) {
     document.getElementById("flexCheckDefault").checked = true;
@@ -51,4 +50,3 @@ Template.signInPage.events({
     //체크박스
   },
 });
-
