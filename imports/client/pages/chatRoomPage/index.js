@@ -75,9 +75,8 @@ Template.chatRoomPage.events({
       instance.find('#textArea').value = ''
     }
     else {
+      return ""
     }
-
-
   },
 })
 

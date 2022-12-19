@@ -54,6 +54,7 @@ Template.roomListPage.events({
         alert(err)
       }
       else {
+        console.log(result)
         FlowRouter.go('/chatRoom/' + result)
       }
     })
