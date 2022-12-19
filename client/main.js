@@ -3,7 +3,6 @@ import "./main.html";
 import "/imports/collections";
 import "/imports/client";
 import "/imports/routes";
-// import "/imports/server/methods";
 import "bootstrap";
 
 Meteor.startup(function () {

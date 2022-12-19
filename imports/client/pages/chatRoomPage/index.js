@@ -3,7 +3,7 @@ import './chatRoomPage.css'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 import { Messages, Rooms } from '/imports/collections'
-import { Tracker } from 'meteor/tracker'
+
 
 Template.chatRoomPage.onCreated(function() {
   const roomId = FlowRouter.getParam('roomId')
@@ -15,13 +15,13 @@ Template.chatRoomPage.onRendered(function() {
   const InMessage = user + '님이 입장하셨습니다'
   chatText_Data(InMessage, true)
   const self = this
-  this.autorun( function() {
-    const Cursor = Messages.find().fetch()  //autorun cursor
-    const element =  self.find('.scroll-box')
-    const msg_height =  element.scrollHeight
+  this.autorun(function() {
+    const Cursor = Messages.find().count() //이미 방에있는 데이터를 찾았기떄문에 최적화 불필요?? 최근데이터 findOne?비동기 or 다른 펍섭에서 작업?...
+
+    const element = self.find('.scroll-box')
+    const msg_height = element.scrollHeight
     element.scroll(0, msg_height)
   })
-
 })
 
 Template.chatRoomPage.onDestroyed(function() {
@@ -32,8 +32,6 @@ Template.chatRoomPage.helpers({
     return Messages.find({})
   },
   Messages_location(item) {
-    const notice = item.notice
-    Session.set('notice', notice)
     const user = Meteor.userId()
     if (item.userId === user) {
       return 'flex-row-reverse'
@@ -60,22 +58,23 @@ Template.chatRoomPage.events({
   },
   'submit .textForm'(event, instance) {
     event.preventDefault()
-    const Text = instance.find('#textAreaExample3').value
+    const Text = instance.find('#textArea').value
     chatText_Data(Text, true)
-    instance.find('#textAreaExample3').value = ''
+    instance.find('#textArea').value = ''
   },
-  'keyup .textForm'(event, instance) {
-    if (event.keyCode === 13 && event.shiftKey) {
+  'keyup #textArea'(event, instance) {
+    if (event.keyCode === 13 && event.shiftKey && !"") {
       event.preventDefault()
-      const text = instance.find('#textAreaExample3').value
-      text.replaceAll('\r\n', '<br>')
+      const text = instance.find('#textArea').value
+      text.replaceAll('\r\n')
     }
-    else if(event.keyCode === 13){
-        event.preventDefault()
-        const Text = instance.find('#textAreaExample3').value
-        chatText_Data(Text, true)
-        instance.find('#textAreaExample3').value = ''
-    }else{
+    else if (event.keyCode === 13) {
+      event.preventDefault()
+      const Text = instance.find('#textArea').value
+      chatText_Data(Text, true)
+      instance.find('#textArea').value = ''
+    }
+    else {
     }
 
 

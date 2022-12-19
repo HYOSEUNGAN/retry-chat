@@ -1,9 +1,7 @@
 <template name="signInPage">
   <section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="row">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-xl-10">
             <div class="card rounded-3 text-black">
               <div class="row g-0">
                 <div class="col-lg-6">
@@ -13,11 +11,11 @@
                            style="width: 185px;" alt="logo">
                       <h4 class="mt-3 mb-5 pb-1">Please Login</h4>
                     </div>
-                    <form id="submit-signIn" class="was-validated">
+                    <form id="submit-signIn" class="validation-form needs-validation" novalidate>
                       <p>Please login to your account</p>
                       <div class="form-outline mb-4">
                         <input name="username" type="text" id="form2Example11" class="form-control"
-                               placeholder="Username" value="{{rememberId}}" required/>
+                               placeholder="Username" value="{{rememberId}}" required />
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                         <label class="form-label" for="form2Example11">Username</label>
@@ -34,11 +32,9 @@
                         </button>
                       </div>
                       <label class="form-check-label m-2" for="flexCheckDefault">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
                         Remember me
                       </label>
-                      <div class="d-flex align-items-center justify-content-center pb-4">
-                      </div>
                     </form>
                   </div>
                 </div>
@@ -53,9 +49,7 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
-    </div>
   </section>
 </template>

@@ -3,12 +3,13 @@ import { Messages, Rooms } from '/imports/collections'
 
 Meteor.methods({
   messageInsert(data) {
+    const createdAt = new Date()
 
     Rooms.update(
       { _id: data.roomId },
       {
         $set: {
-          updatedAt: data.createdAt,
+          updatedAt: createdAt,
           lastUserId: data.userId,
           lastUserName: data.nickName,
           lastUserAvatar: data.avatarImg,

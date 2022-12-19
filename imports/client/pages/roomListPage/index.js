@@ -18,22 +18,20 @@ Template.roomListPage.onDestroyed(function() {
 
 Template.roomListPage.helpers({
   roomList() {
-    return Rooms.find({}, { sort: { updatedAt: -1 } })
+    return Rooms.find({joiner:{$not:[]}}, { sort: { updatedAt: -1 } })
   },
   getDate(date) {
     return date.toLocaleString()
   },
   isJoin(joiner) {
     const userId = Meteor.userId()
-
     return joiner.includes(userId) ? 'Join' : 'no Join'
   },
-  isRead(roomId) {
-    // const read = Read.findOne({ roomId: roomId });
-    const rooms = Rooms.findOne({ _id: roomId })
+  isRead(roomId, data) {
+    const room = data.updatedAt
     const read = Read.findOne({ roomId: roomId })
     if (read) {
-      return read.readAt <= rooms.updatedAt ? 'Read' : 'no Read'
+      return read.readAt <= room.updatedAt ? 'no Read' : 'Read'
     }
     else {
       return 'First'
@@ -43,7 +41,6 @@ Template.roomListPage.helpers({
 
 Template.roomListPage.events({
   'click .logout'() {
-    FlowRouter.go('/signOutPage')
     Meteor.logout()
   },
   'click .room'() {
@@ -69,31 +66,28 @@ Template.roomListPage.events({
   'click li'() {
     const userId = Meteor.userId()
     const roomId = this._id
-    const click_time = new Date()
     Meteor.call('joinerUpdate', roomId, userId)
-    Meteor.call('readLastAtUpdate', roomId, click_time, userId)
+    Meteor.call('readLastAtUpdate', roomId, userId)
     alert('✅채팅방 입장완료')
     FlowRouter.go('/chatRoom/' + roomId)
   },
 })
 
 function chatText_Data(text) {
-  const createdAt = new Date()
   const notice = true
   const message = text
   const userId = Meteor.userId()
   const nickName = Meteor.user().profile.nickName
   const avatarImg = Meteor.user().profile.avatarImg
 
-
   const data = {
-    createdAt: createdAt,
-    notice: notice,
-    message: message,
-    userId: userId,
-    nickName: nickName,
-    avatarImg: avatarImg,
+    notice,
+    message,
+    userId,
+    nickName,
+    avatarImg,
   }
+
   //메서드콜
   Meteor.call('messageInsert', data)
 }
