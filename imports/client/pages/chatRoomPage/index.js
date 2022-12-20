@@ -27,8 +27,10 @@ Template.chatRoomPage.onRendered(function() {
   })
 })
 
-Template.chatRoomPage.onDestroyed(function() {
-})
+Template.chatRoomPage.onCreated(function () {
+  const roomId = FlowRouter.getParam("roomId");
+  this.subscribe("chatMessage", roomId);
+});
 
 Template.chatRoomPage.helpers({
   Messages() {
@@ -105,6 +107,7 @@ function chatText_Data(Text, Notice) {
     roomId: roomId,
   }
   Meteor.call('messageInsert', data)
+
 }
 
 
