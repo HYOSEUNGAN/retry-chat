@@ -54,13 +54,12 @@ Template.roomListPage.events({
         alert(err)
       }
       else {
-        console.log(result)
         FlowRouter.go('/chatRoom/' + result)
+        const user = Meteor.user().profile.nickName
+        const outMessage = user + '님이 방을 생성하셨습니다'
+        chatText_Data(outMessage, result)
       }
     })
-    const user = Meteor.user().profile.nickName
-    const outMessage = user + '님이 방을 생성하셨습니다'
-    chatText_Data(outMessage)
   },
 
   //✅헬퍼에서 This는 데이터 컨택스트이다 => #with로 특정 컨텍스트 데이터 지정
@@ -74,19 +73,23 @@ Template.roomListPage.events({
   },
 })
 
-function chatText_Data(text) {
+function chatText_Data(text ,result) {
+  const createdAt = new Date()
   const notice = true
   const message = text
   const userId = Meteor.userId()
   const nickName = Meteor.user().profile.nickName
   const avatarImg = Meteor.user().profile.avatarImg
+  const roomId = result
 
   const data = {
+    createdAt,
     notice,
     message,
     userId,
     nickName,
     avatarImg,
+    roomId,
   }
 
   //메서드콜
