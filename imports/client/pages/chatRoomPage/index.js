@@ -10,21 +10,20 @@ Template.chatRoomPage.onCreated(function() {
   this.subscribe('chatMessage', roomId)
 })
 
-Template.chatRoomPage.onRendered(function() {
-  const user = Meteor.user()?.profile?.nickName
-  const InMessage = user + '님이 입장하셨습니다'
-
-  // Meteor.call('messageInsert2', data)
+Template.chatRoomPage.onRendered( function() {
+  // const user =   Meteor.userId()
+  const user =   Meteor.user()?.profile.nickName
+  const InMessage =   user + '님이 입장하셨습니다'
   chatText_Data(InMessage, true) //🚨새로고침 에러
 
   const self = this
   this.autorun(function() {
-    console.log("새로고침 오토런")
     const Cursor = Messages.find({}).count()
     const element = self.find('.scroll-box')
     const msg_height = element.scrollHeight
     element.scroll(0, msg_height)
   })
+
 })
 
 Template.chatRoomPage.onCreated(function () {
@@ -89,25 +88,28 @@ Template.chatRoomPage.events({
   },
 })
 
-function chatText_Data(Text, Notice) {
-  const createdAt = new Date()
-  const notice = Notice
-  const message = Text
-  const userId = Meteor.userId()
-  const nickName = Meteor.user().profile.nickName
-  const avatarImg = Meteor.user().profile.avatarImg
-  const roomId = FlowRouter.getParam('roomId')
-  const data = {
-    createdAt: createdAt,
-    notice: notice,
-    message: message,
-    userId: userId,
-    nickName: nickName,
-    avatarImg: avatarImg,
-    roomId: roomId,
+async function chatText_Data(Text, Notice) {
+  if(Meteor.user()){
+    const createdAt = new Date()
+    const notice = Notice
+    const message = await Text
+    const userId = Meteor.userId()
+    const nickName = await Meteor.user().profile.nickName
+    const avatarImg = await Meteor.user().profile.avatarImg
+    const roomId = FlowRouter.getParam('roomId')
+    const data = {
+      createdAt: createdAt,
+      notice: notice,
+      message: message,
+      userId: userId,
+      nickName: nickName,
+      avatarImg: avatarImg,
+      roomId: roomId,
+    }
+    Meteor.call('messageInsert', data)
+  }else{
+    return ""
   }
-  Meteor.call('messageInsert', data)
-
 }
 
 
